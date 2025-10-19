@@ -3,6 +3,8 @@
 function getAll(): array
 {
     $conn = connection();
-    $stmt = $conn->query('select id, description, done, urgency from tasks;');
-    return $stmt->fetchAll();
+    $stmt = $conn->query('SELECT id, description, done, urgency FROM tasks;');
+    $tasks =  $stmt->fetchAll();
+    $conn = null;
+    return $tasks;
 }
