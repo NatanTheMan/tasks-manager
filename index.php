@@ -22,7 +22,7 @@ require 'connection.php';
     </tr>
 <?php
 $conn = connection();
-$stmt = $conn->query('select description, done, urgency from tasks;');
+$stmt = $conn->query('select * from tasks;');
 $color = '';
 foreach ($stmt->fetchAll() as $task) {
     switch ($task['urgency']) {
@@ -41,7 +41,7 @@ foreach ($stmt->fetchAll() as $task) {
     $urgency = $task['done'] == 0 ? "pendendte" : "concluída";
 
     echo "<tr>";
-    echo "<td>✅</td>";
+    echo "<td><form action='done.php' method='post'><button type='submit' name='id' value='" . $task['id'] . "'>✅</button></form></td>";
     echo "<td>" . $task['description'] . "</td>";
     echo "<td>$urgency</td>";
     echo "<td style='color: $color;'>" . $task['urgency'] . "</td>";
