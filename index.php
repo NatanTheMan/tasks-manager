@@ -51,7 +51,11 @@ foreach ($tasks as $task) {
     echo "<td>$description</td>";
     echo "<td>$done</td>";
     echo "<td style='color: $color;'>$urgency</td>";
-    echo "<td>✏️</td>";
+    echo "<td>
+      <form action='edit.php' method='post'>
+        <button type='submit' name='id' value='$id'>✏️</button>
+      </form>
+    </td>";
     echo "<td>
       <form action='delete.php' method='post'>
         <button type='submit' name='id' value='$id'>🗑️</button>
