@@ -13,31 +13,40 @@ require 'connection.php';
  </head>
  <body>
   <h1>Tarefas</h1> 
+  <table> 
+    <tr>
+      <th>Tarefa</th></th>
+      <th>Estado</th>
+      <th>Urgência</th>
+    </tr>
 <?php
 $conn = connection();
 $stmt = $conn->query('select description, done, urgency from tasks;');
 $color = '';
 foreach ($stmt->fetchAll() as $task) {
-    echo "<div>";
-    echo $task['description'];
-    echo $task['done'] == 0 ? "pendendte" : "concluída";
+    echo"<tr>" . "<td>" . $task['description'] . "</td>";
+    $urgency = $task['done'] == 0 ? "pendendte" : "concluída";
+    echo"<td>$urgency</td>";
     switch ($task['urgency']) {
-        case 'baixa':
-            $color = 'gray';
+        case 'low':
+            $color = '#bbb';
             break;
-        case 'média':
-            $color = 'yellow';
+        case 'medium':
+            $color = '#d2a';
             break;
-        case 'alta':
-            $color = 'red';
+        case 'high':
+            $color = '#f00';
             break;
         default:
             break;
     }
-    echo "<span style='color: $color;'>" . $task['urgnecy'] . "</span>";
-    echo "</div>";
+    echo "<td style='color: $color;'>" . $task['urgency'] . "</td></tr>";
 }
+$conn = null;
 ?>
+  </table>
+
+   <button><a href="create.php">+</a></button> 
 
  </body>
 </html>
