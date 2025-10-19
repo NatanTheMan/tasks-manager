@@ -1,6 +1,7 @@
 <?php
 
 require 'connection.php';
+require 'getAll.php';
 
 ?>
 
@@ -21,11 +22,13 @@ require 'connection.php';
       <th>Urgência</th>
     </tr>
 <?php
-$conn = connection();
-$stmt = $conn->query('select * from tasks;');
 $color = '';
-foreach ($stmt->fetchAll() as $task) {
-    switch ($task['urgency']) {
+$tasks = getAll();
+foreach ($tasks as $task) {
+    [$id, $description, $done, $urgency] = $task;
+    $done = $done ? "concluída" : "pendente";
+
+    switch ($urgency) {
         case 'low':
             $color = '#bbb';
             break;
@@ -38,17 +41,19 @@ foreach ($stmt->fetchAll() as $task) {
         default:
             break;
     }
-    $urgency = $task['done'] == 0 ? "pendendte" : "concluída";
 
     echo "<tr>";
-    echo "<td><form action='done.php' method='post'><button type='submit' name='id' value='" . $task['id'] . "'>✅</button></form></td>";
-    echo "<td>" . $task['description'] . "</td>";
-    echo "<td>$urgency</td>";
-    echo "<td style='color: $color;'>" . $task['urgency'] . "</td>";
+    echo "<td>
+      <form action='done.php' method='post'>
+        <button type='submit' name='id' value='$id'>✅</button>
+      </form>
+    </td>";
+    echo "<td>$description</td>";
+    echo "<td>$done</td>";
+    echo "<td style='color: $color;'>$urgency</td>";
     echo "<td>✏️</td>";
     echo "<td>🗑️</td></tr>";
 }
-$conn = null;
 ?>
   </table>
 
