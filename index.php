@@ -26,6 +26,7 @@ $color = '';
 $tasks = getAll();
 foreach ($tasks as $task) {
     [$id, $description, $done, $urgency] = $task;
+    $status = $done;
     $done = $done ? "concluída" : "pendente";
 
     switch ($urgency) {
@@ -43,11 +44,19 @@ foreach ($tasks as $task) {
     }
 
     echo "<tr>";
-    echo "<td>
-      <form action='done.php' method='post'>
-        <button type='submit' name='id' value='$id'>✅</button>
+    if ($status) {
+        echo "<td>
+      <form action='undone.php' method='post'>
+         <button type='submit' name='id' value='$id'>❌</button>
       </form>
     </td>";
+    } else {
+        echo "<td>
+      <form action='done.php' method='post'>
+         <button type='submit' name='id' value='$id'>✅</button>
+      </form>
+    </td>";
+    }
     echo "<td>$description</td>";
     echo "<td>$done</td>";
     echo "<td style='color: $color;'>$urgency</td>";
