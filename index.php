@@ -14,8 +14,9 @@ require 'connection.php';
  <body>
   <h1>Tarefas</h1> 
   <table> 
-    <tr>
-      <th>Tarefa</th></th>
+    <tr> 
+      <th></th>
+      <th>Tarefa</th>
       <th>Estado</th>
       <th>Urgência</th>
     </tr>
@@ -24,9 +25,6 @@ $conn = connection();
 $stmt = $conn->query('select description, done, urgency from tasks;');
 $color = '';
 foreach ($stmt->fetchAll() as $task) {
-    echo"<tr>" . "<td>" . $task['description'] . "</td>";
-    $urgency = $task['done'] == 0 ? "pendendte" : "concluída";
-    echo"<td>$urgency</td>";
     switch ($task['urgency']) {
         case 'low':
             $color = '#bbb';
@@ -40,7 +38,15 @@ foreach ($stmt->fetchAll() as $task) {
         default:
             break;
     }
-    echo "<td style='color: $color;'>" . $task['urgency'] . "</td></tr>";
+    $urgency = $task['done'] == 0 ? "pendendte" : "concluída";
+
+    echo "<tr>";
+    echo "<td>✅</td>";
+    echo "<td>" . $task['description'] . "</td>";
+    echo "<td>$urgency</td>";
+    echo "<td style='color: $color;'>" . $task['urgency'] . "</td>";
+    echo "<td>✏️</td>";
+    echo "<td>🗑️</td></tr>";
 }
 $conn = null;
 ?>
