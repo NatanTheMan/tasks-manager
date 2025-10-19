@@ -1,6 +1,7 @@
 <?php
 
-require 'connection.php';
+require '../config/connection.php';
+require '../includes/functions.php';
 
 if (isset($_POST['id'])) {
     $conn = connection();
@@ -9,5 +10,4 @@ if (isset($_POST['id'])) {
     $stmt->execute();
     $conn = null;
 }
-header('Location: index.php');
-exit();
+redirect('../views/index.php');

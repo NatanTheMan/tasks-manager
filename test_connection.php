@@ -1,6 +1,6 @@
 <?php
 
-require 'connection.php';
+require './config/connection.php';
 
 try {
     $conn = connection();

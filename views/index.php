@@ -1,7 +1,6 @@
 <?php
 
-require 'connection.php';
-require 'getAll.php';
+require '../actions/getAll.php';
 
 ?>
 
@@ -46,13 +45,13 @@ foreach ($tasks as $task) {
     echo "<tr>";
     if ($status) {
         echo "<td>
-      <form action='undone.php' method='post'>
+      <form action='../actions/undone.php' method='post'>
          <button type='submit' name='id' value='$id'>❌</button>
       </form>
     </td>";
     } else {
         echo "<td>
-      <form action='done.php' method='post'>
+      <form action='../actions/done.php' method='post'>
          <button type='submit' name='id' value='$id'>✅</button>
       </form>
     </td>";
@@ -61,12 +60,12 @@ foreach ($tasks as $task) {
     echo "<td>$done</td>";
     echo "<td style='color: $color;'>$urgency</td>";
     echo "<td>
-      <form action='edit.php' method='post'>
+      <form action='../views/form_edit.php' method='post'>
         <button type='submit' name='id' value='$id'>✏️</button>
       </form>
     </td>";
     echo "<td>
-      <form action='delete.php' method='post'>
+      <form action='../actions/delete.php' method='post'>
         <button type='submit' name='id' value='$id'>🗑️</button>
       </form>
     </td></tr>";
@@ -74,7 +73,7 @@ foreach ($tasks as $task) {
 ?>
   </table>
 
-   <button><a href="create.php">+</a></button> 
+   <button><a href="../views/form_create.php">+</a></button> 
 
  </body>
 </html>

@@ -2,7 +2,7 @@
 
 function connection(): PDO
 {
-    $vars = parse_ini_file(__DIR__ . "/.env");
+    $vars = parse_ini_file(__DIR__ . "/../.env");
     foreach ($vars as $key => $value) {
         putenv("$key=$value");
         $_ENV[$key] = $value;

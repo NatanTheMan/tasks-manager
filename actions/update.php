@@ -1,6 +1,7 @@
 <?php
 
-require 'connection.php';
+require '../config/connection.php';
+require '../includes/functions.php';
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -14,5 +15,4 @@ $stmt->bindParam(':urgency', $urgency);
 $stmt->execute();
 $conn = null;
 
-header('Location: index.php');
-exit();
+redirect('../views/index.php');

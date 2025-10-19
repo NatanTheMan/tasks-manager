@@ -7,10 +7,10 @@
  </head>
  <body>
   <h1>Atualizar tarefa</h1> 
-    <form action="update.php" method="post">
+    <form action="../actions/update.php" method="post">
       <label for="description">Tarefa: </label>
 <?php
-require 'getOne.php';
+require '../actions/getOne.php';
 
 [$id,$description,$done,$urgency] = getOne($_POST['id']);
 

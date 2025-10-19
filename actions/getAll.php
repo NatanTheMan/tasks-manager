@@ -1,5 +1,7 @@
 <?php
 
+require '../config/connection.php';
+
 function getAll(): array
 {
     $conn = connection();

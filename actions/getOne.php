@@ -1,11 +1,11 @@
 <?php
 
-require 'connection.php';
+require '../config/connection.php';
 
 function getOne(int $id)
 {
     $conn = connection();
-    $stmt = $conn->prepare('select * from tasks where id=:id');
+    $stmt = $conn->prepare('SELECT * FROM tasks WHERE id=:id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $conn = null;
