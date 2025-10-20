@@ -17,6 +17,7 @@ if ($email != '' && $password != '') {
     create($email, $password);
     $_SESSION['user'] = $email;
     header('Location: ../views/home.php');
+    exit;
 }
 
 ?>
