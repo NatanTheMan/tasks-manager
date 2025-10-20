@@ -6,6 +6,8 @@
    <title>Criar tarefa</title>
  </head>
  <body>
+<?php require '../includes/header.php';
+generateHeader();?>
   <h1>Criar tarefa</h1> 
     <form action="../actions/create.php" method="post">
       <label for="description">Tarefa: </label>

@@ -6,6 +6,8 @@
    <title>Atualizar tarefa</title>
  </head>
  <body>
+<?php require '../includes/header.php';
+generateHeader();?>
   <h1>Atualizar tarefa</h1> 
     <form action="../actions/update.php" method="post">
       <label for="description">Tarefa: </label>
