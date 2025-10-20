@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/connection.php';
+session_start();
 
 function create(string $email, string $password): void
 {
@@ -11,7 +12,8 @@ function create(string $email, string $password): void
         $stmt->bindParam(':password', $password);
         $stmt->execute();
         $conn = null;
-        header('Location: ./views/home.php');
+        $_SESSION['user'] = $email;
+        header('Location: ../../views/home.php');
         exit;
     } catch (PDOException $e) {
         echo '</p>' . $e->getMessage() . '</p>';

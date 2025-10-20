@@ -16,7 +16,7 @@ if ($email != '' && $password != '') {
     }
     create($email, $password);
     $_SESSION['user'] = $email;
-    header('Location: ../views/index.php');
+    header('Location: ../views/home.php');
 }
 
 ?>
@@ -35,7 +35,9 @@ if ($email != '' && $password != '') {
       <label for="password">Senha</label><br>
       <input type="password" id="password" name="password" ><br>
 
-      <button type="submit">Criar</button>
+      <button type="submit">Criar</button><br>
+
+    <a href="./login.php">Login</a>
     </form>
  </body>
 </html>

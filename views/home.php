@@ -1,9 +1,12 @@
 <?php
+session_start();
+
 if (!isset($_SESSION['user'])) {
     header('Location: ./login.php');
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -12,6 +15,10 @@ if (!isset($_SESSION['user'])) {
    <title>Gerenciar Tarefas</title>
  </head>
  <body>
+<?php
+require '../includes/header.php';
+generateHeader();
+?>
   <h1>Tarefas</h1> 
   <table> 
     <tr> 

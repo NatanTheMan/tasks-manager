@@ -13,7 +13,9 @@
     <label for="password">Password</label><br>
     <input type="password" id="password" name="password"><br>
 
-      <button type="submit">Entrar</button>
+    <button type="submit">Entrar</button><br>
+
+    <a href="./register.php">Criar conta</a>
     </form>
  </body>
 </html>
