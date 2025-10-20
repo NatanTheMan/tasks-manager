@@ -7,7 +7,7 @@ function generateHeader(): void
 
             <nav style='margin-right: 60px;'>
               <a href='../views/form_create.php'>Adicionar</a> 
-              <a href='../actions/logout.php'>Sair ➡️</a> 
+              <a href='../actions/user/logout.php'>Sair ➡️</a> 
             </nav>
           </header>";
 }
