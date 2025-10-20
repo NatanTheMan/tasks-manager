@@ -1,7 +1,7 @@
 <?php
 
-require '../config/connection.php';
-require '../includes/functions.php';
+require_once __DIR__ . '/../config/connection.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -15,4 +15,4 @@ $stmt->bindParam(':urgency', $urgency);
 $stmt->execute();
 $conn = null;
 
-redirect('../views/index.php');
+redirect('../views/home.php');

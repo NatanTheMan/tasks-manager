@@ -1,9 +1,3 @@
-<?php
-
-require '../actions/getAll.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -21,28 +15,54 @@ require '../actions/getAll.php';
       <th>Urgência</th>
     </tr>
 <?php
-$color = '';
+
+require '../actions/getAll.php';
+
 $tasks = getAll();
-foreach ($tasks as $task) {
-    [$id, $description, $done, $urgency] = $task;
+foreach ($tasks as [$id, $description, $done, $urgency]) {
     $status = $done;
     $done = $done ? "concluída" : "pendente";
-
-    switch ($urgency) {
-        case 'low':
-            $color = '#bbb';
-            break;
-        case 'medium':
-            $color = '#d2a';
-            break;
-        case 'high':
-            $color = '#f00';
-            break;
-        default:
-            break;
-    }
+    $color = defineColor($urgency);
 
     echo "<tr>";
+    statusChangeBtn($status, $id);
+    echo "<td>$description</td>";
+    echo "<td>$done</td>";
+    echo "<td style='color: $color;'>$urgency</td>";
+    editBtn($id);
+    deleteBtn($id);
+    echo "</tr>";
+}
+?>
+  </table>
+
+   <button><a href="../views/form_create.php">+</a></button> 
+
+ </body>
+</html>
+
+<?php
+
+function defineColor(string $urgency): string
+{
+    switch ($urgency) {
+        case 'low':
+            return '#bbb';
+            break;
+        case 'medium':
+            return '#d2a';
+            break;
+        case 'high':
+            return '#f00';
+            break;
+        default:
+            return '';
+            break;
+    }
+}
+
+function statusChangeBtn(bool $status, int $id): void
+{
     if ($status) {
         echo "<td>
       <form action='../actions/undone.php' method='post'>
@@ -56,24 +76,22 @@ foreach ($tasks as $task) {
       </form>
     </td>";
     }
-    echo "<td>$description</td>";
-    echo "<td>$done</td>";
-    echo "<td style='color: $color;'>$urgency</td>";
+}
+
+function editBtn(int $id): void
+{
     echo "<td>
       <form action='../views/form_edit.php' method='post'>
         <button type='submit' name='id' value='$id'>✏️</button>
       </form>
     </td>";
+}
+
+function deleteBtn(int $id): void
+{
     echo "<td>
       <form action='../actions/delete.php' method='post'>
         <button type='submit' name='id' value='$id'>🗑️</button>
       </form>
-    </td></tr>";
+    </td>";
 }
-?>
-  </table>
-
-   <button><a href="../views/form_create.php">+</a></button> 
-
- </body>
-</html>

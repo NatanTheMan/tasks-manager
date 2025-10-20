@@ -1,6 +1,6 @@
 <?php
 
-require '../config/connection.php';
+require_once __DIR__ . '/../config/connection.php';
 
 function getOne(int $id)
 {

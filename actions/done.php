@@ -1,7 +1,7 @@
 <?php
 
-require '../config/connection.php';
-require '../includes/functions.php';
+require_once __DIR__ . '/../config/connection.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 if (isset($_POST['id'])) {
     $conn = connection();
@@ -9,4 +9,4 @@ if (isset($_POST['id'])) {
     $stmt->bindParam(':id', $_POST['id']);
     $stmt->execute();
 }
-redirect('../views/index.php');
+redirect('../views/home.php');
