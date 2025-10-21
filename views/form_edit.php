@@ -1,3 +1,13 @@
+<?php
+
+require '../includes/header.php';
+require '../actions/taskActions.php';
+
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+$task = getOneTask($id);
+
+?>
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -6,39 +16,33 @@
    <title>Atualizar tarefa</title>
  </head>
  <body>
-<?php require '../includes/header.php';
-generateHeader();?>
+  <?php generateHeader(); ?>
   <h1>Atualizar tarefa</h1> 
-    <form action="../actions/update.php" method="post">
+    <form action="../actions/update.php?id=<?= $id ?>" method="post">
       <label for="description">Tarefa: </label>
-<?php
-require '../actions/getOne.php';
+      <input type='text' name='description' id='description' value='<?= $task['description'] ?>'>
 
-[$id,$description,$done,$urgency] = getOne($_POST['id']);
+      <select name='urgency'>
+        <?php if ($task['urgency'] === 'low') : ?>
+          <option value='low' selected>Baixa</option>
+        <?php else : ?>
+          <option value='low'>Baixa</option>
+        <?php endif ?>
 
-echo "<input type='text' name='description' id='description' value='$description'>";
-echo "<select name='urgency'>";
+        <?php if ($task['urgency'] === 'medium') : ?>
+          <option value='medium' selected>Média</option>
+        <?php else : ?>
+          <option value='medium'>Média</option>
+        <?php endif ?>
 
-if ($urgency === 'low') {
-    echo "<option value='low' selected>Baixa</option>";
-} else {
-    echo "<option value='low'>Baixa</option>";
-}
-if ($urgency === 'medium') {
-    echo "<option value='medium' selected>Média</option>";
-} else {
-    echo "<option value='medium'>Média</option>";
-}
-if ($urgency === 'high') {
-    echo "<option value='high' selected>Alta</option>";
-} else {
-    echo "<option value='high'>Alta</option>";
-}
+        <?php if ($task['urgency'] === 'high') : ?>
+          <option value='high' selected>Alta</option>
+        <?php else : ?>
+          <option value='high'>Alta</option>
+        <?php endif ?>
+      </select>
 
-echo "</select>";
-echo  "<button type='submit' name='id' value='$id'>Editar</button>";
-?>
-
+      <button type='submit'>Editar</button>
     </form>
  </body>
 </html>

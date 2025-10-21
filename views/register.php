@@ -1,26 +1,3 @@
-<?php
-
-session_start();
-
-require '../actions/user/register.php';
-require '../actions/user/getOne.php';
-
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-$password = password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS), PASSWORD_ARGON2ID);
-
-
-if ($email != '' && $password != '') {
-    if (userExists($email)) {
-        echo 'Email já cadastrado';
-        exit;
-    }
-    create($email, $password);
-    $_SESSION['user'] = $email;
-    header('Location: ../views/home.php');
-    exit;
-}
-
-?>
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -30,7 +7,7 @@ if ($email != '' && $password != '') {
  </head>
  <body>
   <h1>Criar conta</h1> 
-    <form action="" method="post">
+    <form action="../actions/register.php" method="post">
       <label for="email">E-mail</label><br>
       <input type="email" id="email" name="email" ><br>
       <label for="password">Senha</label><br>
@@ -38,7 +15,7 @@ if ($email != '' && $password != '') {
 
       <button type="submit">Criar</button><br>
 
-    <a href="./login.php">Login</a>
+      <a href="./login.php">Login</a>
     </form>
  </body>
 </html>

@@ -1,10 +1,17 @@
 <?php
+
+require '../includes/header.php';
+require_once '../includes/functions.php';
+require_once '../actions/taskActions.php';
+
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header('Location: ./login.php');
-    exit;
+    redirect('./login.php');
 }
+
+$tasks = getAllTasks();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +22,7 @@ if (!isset($_SESSION['user'])) {
    <title>Gerenciar Tarefas</title>
  </head>
  <body>
-<?php
-require '../includes/header.php';
-generateHeader();
-?>
+  <?php generateHeader(); ?>
   <h1>Tarefas</h1> 
   <table> 
     <tr> 
@@ -27,29 +31,39 @@ generateHeader();
       <th>Estado</th>
       <th>Urgência</th>
     </tr>
-<?php
-
-require '../actions/getAll.php';
-
-$tasks = getAll();
-foreach ($tasks as [$id, $description, $done, $urgency]) {
-    $status = $done;
-    $done = $done ? "concluída" : "pendente";
-    $color = defineColor($urgency);
-
-    echo "<tr>";
-    statusChangeBtn($status, $id);
-    echo "<td>$description</td>";
-    echo "<td>$done</td>";
-    echo "<td style='color: $color;'>$urgency</td>";
-    editBtn($id);
-    deleteBtn($id);
-    echo "</tr>";
-}
-?>
+    <?php foreach ($tasks as [$id, $description, $done, $urgency]) : ?>
+      <tr>
+        <?php if ($done) : ?>
+        <td>
+          <form action='../actions/undone.php?id=<?= $id ?>' method='post'>
+            <button type='submit'>❌</button>
+          </form>
+        </td>
+        <?php else : ?>
+        <td>
+          <form action='../actions/done.php?id=<?= $id ?>' method='post'>
+            <button type='submit'>✅</button>
+          </form>
+        </td>
+        <?php endif ?>
+        <td><?= $description ?></td>
+        <td><?= $done ? "concluída" : "pendente" ?></td>
+        <td style="color: <?= defineColor($urgency) ?>;"><?= $urgency ?></td>
+        <td>
+          <form action='../views/form_edit.php?id=<?= $id ?>' method='post'>
+            <button type='submit'>✏️</button>
+          </form>
+        </td>
+        <td>
+          <form action='../actions/delete.php?id=<?= $id?>' method='post'>
+            <button type='submit'>🗑️</button>
+          </form>
+        </td>
+      </tr>
+    <?php endforeach; ?>
   </table>
 
-   <button><a href="../views/form_create.php">+</a></button> 
+   <button><a  href="../views/form_create.php">+</a></button> 
 
  </body>
 </html>
@@ -72,39 +86,4 @@ function defineColor(string $urgency): string
             return '';
             break;
     }
-}
-
-function statusChangeBtn(bool $status, int $id): void
-{
-    if ($status) {
-        echo "<td>
-      <form action='../actions/undone.php' method='post'>
-         <button type='submit' name='id' value='$id'>❌</button>
-      </form>
-    </td>";
-    } else {
-        echo "<td>
-      <form action='../actions/done.php' method='post'>
-         <button type='submit' name='id' value='$id'>✅</button>
-      </form>
-    </td>";
-    }
-}
-
-function editBtn(int $id): void
-{
-    echo "<td>
-      <form action='../views/form_edit.php' method='post'>
-        <button type='submit' name='id' value='$id'>✏️</button>
-      </form>
-    </td>";
-}
-
-function deleteBtn(int $id): void
-{
-    echo "<td>
-      <form action='../actions/delete.php' method='post'>
-        <button type='submit' name='id' value='$id'>🗑️</button>
-      </form>
-    </td>";
 }

@@ -1,0 +1,23 @@
+<?php
+
+session_start();
+
+require_once __DIR__ . '/userActions.php';
+require_once '../includes/functions.php';
+
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+
+try {
+    $user = getOneUser($email);
+
+    if (password_verify($password, $user['password'])) {
+        $_SESSION['user'] = $user['id'];
+        redirect('../../views/home.php');
+    } else {
+        echo '<p>Senha ou usuario incorretos</p><br>';
+        echo "<a href='../views/login.php'>Voltar</a>";
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}

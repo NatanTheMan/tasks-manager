@@ -1,3 +1,18 @@
+<?php
+
+require'../includes/header.php';
+require'../actions/taskActions.php';
+
+$urgency = filter_input(INPUT_POST, 'urgency', FILTER_SANITIZE_SPECIAL_CHARS);
+$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+if ($description != '' && !is_null($description)) {
+    createTask($description, $urgency);
+    redirect('../views/home.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -6,10 +21,9 @@
    <title>Criar tarefa</title>
  </head>
  <body>
-<?php require '../includes/header.php';
-generateHeader();?>
+<?php  generateHeader();?>
   <h1>Criar tarefa</h1> 
-    <form action="../actions/create.php" method="post">
+    <form action="" method="post">
       <label for="description">Tarefa: </label>
       <input type="text" name="description" id="description">
       <select name="urgency">

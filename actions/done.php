@@ -1,12 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../config/connection.php';
-require_once __DIR__ . '/../includes/functions.php';
+require_once '../includes/functions.php';
+require_once __DIR__ . '/taskActions.php';
 
-if (isset($_POST['id'])) {
-    $conn = connection();
-    $stmt =  $conn->prepare("UPDATE tasks SET done=1 WHERE id=:id");
-    $stmt->bindParam(':id', $_POST['id']);
-    $stmt->execute();
-}
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+doneTask($id);
+
 redirect('../views/home.php');

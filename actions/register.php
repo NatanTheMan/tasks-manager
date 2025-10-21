@@ -1,0 +1,22 @@
+<?php
+
+session_start();
+
+require_once './userActions.php';
+require_once '../includes/functions.php';
+
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ;
+
+
+if ($email == '' || $password == '') {
+    echo 'Email e Senha são obrigatórios.';
+}
+
+try {
+    createUser($email, password_hash($password, PASSWORD_ARGON2I));
+    $_SESSION['user'] = $email;
+    redirect('../views/home.php');
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
