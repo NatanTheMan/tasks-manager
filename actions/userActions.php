@@ -7,7 +7,7 @@ session_start();
 function createUser(string $email, string $password): void
 {
     $conn = connection();
-    $stmt = $conn->prepare('SELECT id FROM users WHERE email=:email;');
+    $stmt = $conn->prepare('SELECT user_id FROM users WHERE email=:email;');
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     if ($stmt->fetch()) {
@@ -24,7 +24,7 @@ function createUser(string $email, string $password): void
 function getOneUser(string $email): array
 {
     $conn = connection();
-    $stmt = $conn->prepare('SELECT id, password FROM users WHERE email=:email;');
+    $stmt = $conn->prepare('SELECT user_id, password FROM users WHERE email=:email;');
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $conn = null;

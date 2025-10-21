@@ -6,11 +6,11 @@ require_once '../actions/taskActions.php';
 
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user_id'])) {
     redirect('./login.php');
 }
 
-$tasks = getAllTasks();
+$tasks = getAllTasks($_SESSION['user_id']);
 
 ?>
 

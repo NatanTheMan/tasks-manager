@@ -15,7 +15,7 @@ if ($email == '' || $password == '') {
 
 try {
     createUser($email, password_hash($password, PASSWORD_ARGON2I));
-    $_SESSION['user'] = $email;
+    $_SESSION['user_id'] = getOneUser($email)['user_id'];
     redirect('../views/home.php');
 } catch (Exception $e) {
     echo $e->getMessage();

@@ -12,7 +12,7 @@ try {
     $user = getOneUser($email);
 
     if (password_verify($password, $user['password'])) {
-        $_SESSION['user'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         redirect('../../views/home.php');
     } else {
         echo '<p>Senha ou usuario incorretos</p><br>';

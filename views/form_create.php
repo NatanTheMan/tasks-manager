@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require'../includes/header.php';
 require'../actions/taskActions.php';
 
@@ -7,7 +9,7 @@ $urgency = filter_input(INPUT_POST, 'urgency', FILTER_SANITIZE_SPECIAL_CHARS);
 $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 if ($description != '' && !is_null($description)) {
-    createTask($description, $urgency);
+    createTask($description, $urgency, $_SESSION['user_id']);
     redirect('../views/home.php');
 }
 
