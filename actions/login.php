@@ -11,8 +11,8 @@ $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 try {
     $user = getOneUser($email);
 
-    if (password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['user_id'];
+    if (password_verify($password, $user->password)) {
+        $_SESSION['user_id'] = $user->user_id;
         redirect('../../views/home.php');
     } else {
         echo '<p>Senha ou usuario incorretos</p><br>';

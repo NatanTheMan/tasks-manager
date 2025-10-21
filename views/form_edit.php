@@ -20,22 +20,22 @@ $task = getOneTask($id);
   <h1>Atualizar tarefa</h1> 
     <form action="../actions/update.php?id=<?= $id ?>" method="post">
       <label for="description">Tarefa: </label>
-      <input type='text' name='description' id='description' value='<?= $task['description'] ?>'>
+      <input type='text' name='description' id='description' value='<?= $task->description ?>'>
 
       <select name='urgency'>
-        <?php if ($task['urgency'] === 'low') : ?>
+        <?php if ($task->urgency === 'low') : ?>
           <option value='low' selected>Baixa</option>
         <?php else : ?>
           <option value='low'>Baixa</option>
         <?php endif ?>
 
-        <?php if ($task['urgency'] === 'medium') : ?>
+        <?php if ($task->urgency === 'medium') : ?>
           <option value='medium' selected>Média</option>
         <?php else : ?>
           <option value='medium'>Média</option>
         <?php endif ?>
 
-        <?php if ($task['urgency'] === 'high') : ?>
+        <?php if ($task->urgency === 'high') : ?>
           <option value='high' selected>Alta</option>
         <?php else : ?>
           <option value='high'>Alta</option>

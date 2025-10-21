@@ -31,31 +31,31 @@ $tasks = getAllTasks($_SESSION['user_id']);
       <th>Estado</th>
       <th>Urgência</th>
     </tr>
-    <?php foreach ($tasks as [$id, $description, $done, $urgency]) : ?>
+    <?php foreach ($tasks as $task) : ?>
       <tr>
-        <?php if ($done) : ?>
+        <?php if ($task->done) : ?>
         <td>
-          <form action='../actions/undone.php?id=<?= $id ?>' method='post'>
+          <form action='../actions/undone.php?id=<?= $task->task_id ?>' method='post'>
             <button type='submit'>❌</button>
           </form>
         </td>
         <?php else : ?>
         <td>
-          <form action='../actions/done.php?id=<?= $id ?>' method='post'>
+          <form action='../actions/done.php?id=<?= $task->task_id ?>' method='post'>
             <button type='submit'>✅</button>
           </form>
         </td>
         <?php endif ?>
-        <td><?= $description ?></td>
-        <td><?= $done ? "concluída" : "pendente" ?></td>
-        <td style="color: <?= defineColor($urgency) ?>;"><?= $urgency ?></td>
+        <td><?= $task->description ?></td>
+        <td><?= $task->done ? "concluída" : "pendente" ?></td>
+        <td style="color: <?= defineColor($task->urgency) ?>;"><?= $task->urgency ?></td>
         <td>
-          <form action='../views/form_edit.php?id=<?= $id ?>' method='post'>
+          <form action='../views/form_edit.php?id=<?= $task->task_id ?>' method='post'>
             <button type='submit'>✏️</button>
           </form>
         </td>
         <td>
-          <form action='../actions/delete.php?id=<?= $id?>' method='post'>
+          <form action='../actions/delete.php?id=<?= $task->task_id?>' method='post'>
             <button type='submit'>🗑️</button>
           </form>
         </td>

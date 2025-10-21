@@ -37,19 +37,19 @@ function getAllTasks(int $userId): array
     $stmt = $conn->prepare("SELECT task_id, description, done, urgency FROM tasks WHERE user_id=:id;");
     $stmt->bindParam(':id', $userId);
     $stmt->execute();
-    $tasks =  $stmt->fetchAll();
+    $tasks =  $stmt->fetchAll(PDO::FETCH_OBJ);
     $conn = null;
     return $tasks;
 }
 
-function getOneTask(int $id): array
+function getOneTask(int $id): object
 {
     $conn = connection();
     $stmt = $conn->prepare('SELECT * FROM tasks WHERE task_id=:id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $conn = null;
-    return $stmt->fetch();
+    return $stmt->fetch(PDO::FETCH_OBJ);
 }
 
 function undone(int $id): void

@@ -21,14 +21,14 @@ function createUser(string $email, string $password): void
     $conn = null;
 }
 
-function getOneUser(string $email): array
+function getOneUser(string $email): object
 {
     $conn = connection();
     $stmt = $conn->prepare('SELECT user_id, password FROM users WHERE email=:email;');
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $conn = null;
-    $result = $stmt->fetch();
+    $result = $stmt->fetch(PDO::FETCH_OBJ);
     if ($result == false) {
         throw new Exception('Usuário não encontrado');
     }
