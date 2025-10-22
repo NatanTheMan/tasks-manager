@@ -10,12 +10,13 @@ $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CH
 
 
 if ($email == '' || $password == '') {
-    echo 'Email e Senha são obrigatórios.';
+    $_SESSION['error'] = 'Email e Senha são obrigatórios.';
+    redirect('../views/register.php');
 }
 
 if (userExists($email)) {
-    echo 'Usuário já cadastrado';
-    exit;
+    $_SESSION['error'] = 'Usuário já cadastrado';
+    redirect('../views/register.php');
 }
 
 createUser($email, password_hash($password, PASSWORD_ARGON2I));

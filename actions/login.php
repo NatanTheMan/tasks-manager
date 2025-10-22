@@ -9,8 +9,8 @@ $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL, FILTER_SANITIZ
 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
 if (!userExists($email)) {
-    echo 'User não encontrado';
-    exit;
+    $_SESSION['error'] = "User não encontrado";
+    redirect('../views/login.php');
 }
 
 $user = getOneUser($email);
@@ -19,6 +19,6 @@ if (password_verify($password, $user->password)) {
     $_SESSION['user_id'] = $user->user_id;
     redirect('../../views/home.php');
 } else {
-    echo '<p>Senha ou usuario incorretos</p><br>';
-    echo "<a href='../views/login.php'>Voltar</a>";
+    $_SESSION['error'] = "Senha ou usuario incorretos";
+    redirect('../views/login.php');
 }

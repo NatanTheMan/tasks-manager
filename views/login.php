@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang='pt-br'>
  <head>
@@ -17,5 +21,11 @@
 
     <a href="./register.php">Criar conta</a>
     </form>
+
+    <?php if (isset($_SESSION['error']) && !is_null($_SESSION['error'])) : ?>
+      <p style="color: #f33;"><?= $_SESSION['error'] ?></p>
+        <?php unset($_SESSION['error']) ?>
+    <?php endif ?>
+
  </body>
 </html>
