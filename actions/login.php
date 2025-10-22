@@ -6,7 +6,7 @@ require_once __DIR__ . '/userActions.php';
 require_once '../includes/functions.php';
 
 if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
-    redirect('./login.php');
+    redirect('../views/login.php');
 }
 
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL, FILTER_SANITIZE_EMAIL);
