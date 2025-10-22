@@ -13,6 +13,8 @@ if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
 
 $tasks = getAllTasks($_SESSION['user_id']);
 
+$colorSettings = ["low" => "#bbb", "medium" => "#d2a", "high" => "#f00"];
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,9 @@ $tasks = getAllTasks($_SESSION['user_id']);
         <?php endif ?>
         <td><?= $task->description ?></td>
         <td><?= $task->done ? "concluída" : "pendente" ?></td>
-        <td style="color: <?= defineColor($task->urgency) ?>;"><?= $task->urgency ?></td>
+
+        <td style="color: <?= $colorSettings[$task->urgency] ?>;"><?= $task->urgency ?></td>
+
         <td>
           <form action='../views/form_edit.php?id=<?= $task->task_id ?>' method='post'>
             <button type='submit'>✏️</button>
@@ -68,23 +72,3 @@ $tasks = getAllTasks($_SESSION['user_id']);
 
  </body>
 </html>
-
-<?php
-
-function defineColor(string $urgency): string
-{
-    switch ($urgency) {
-        case 'low':
-            return '#bbb';
-            break;
-        case 'medium':
-            return '#d2a';
-            break;
-        case 'high':
-            return '#f00';
-            break;
-        default:
-            return '';
-            break;
-    }
-}
