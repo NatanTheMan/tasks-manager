@@ -5,6 +5,10 @@ session_start();
 require'../includes/header.php';
 require'../actions/taskActions.php';
 
+if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
+    redirect('./login.php');
+}
+
 $urgency = filter_input(INPUT_POST, 'urgency', FILTER_SANITIZE_SPECIAL_CHARS);
 $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 

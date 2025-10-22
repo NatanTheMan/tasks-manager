@@ -1,7 +1,13 @@
 <?php
 
+session_start();
+
 require '../includes/header.php';
 require '../actions/taskActions.php';
+
+if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
+    redirect('./login.php');
+}
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
