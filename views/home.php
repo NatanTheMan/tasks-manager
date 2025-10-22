@@ -1,12 +1,13 @@
 <?php
 
+session_start();
+
 require '../includes/header.php';
 require_once '../includes/functions.php';
 require_once '../actions/taskActions.php';
 
-session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
     redirect('./login.php');
 }
 

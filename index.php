@@ -3,4 +3,6 @@
 session_start();
 require_once './includes/functions.php';
 
-isset($_SESSION['user_id']) ? redirect('./views/home.php') : redirect('./views/login.php');
+isset($_SESSION['user_id']) && !is_null($_SESSION['user_id'])
+? redirect('./views/home.php')
+: redirect('./views/login.php');
