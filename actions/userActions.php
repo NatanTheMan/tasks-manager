@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../config/connection.php';
-
 session_start();
+
+require_once __DIR__ . '/../config/connection.php';
 
 function createUser(string $email, string $password): void
 {
