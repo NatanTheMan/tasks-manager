@@ -13,10 +13,11 @@ if ($email == '' || $password == '') {
     echo 'Email e Senha são obrigatórios.';
 }
 
-try {
-    createUser($email, password_hash($password, PASSWORD_ARGON2I));
-    $_SESSION['user_id'] = getOneUser($email)['user_id'];
-    redirect('../views/home.php');
-} catch (Exception $e) {
-    echo $e->getMessage();
+if (userExists($email)) {
+    echo 'Usuário já cadastrado';
+    exit;
 }
+
+createUser($email, password_hash($password, PASSWORD_ARGON2I));
+$_SESSION['user_id'] = getOneUser($email)['user_id'];
+redirect('../views/home.php');
