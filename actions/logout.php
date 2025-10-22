@@ -2,6 +2,7 @@
 
 session_start();
 
+require '../includes/functions.php';
+
 unset($_SESSION['user_id']);
-header('Location: ../../views/login.php');
-exit;
+redirect('../../views/login.php');
