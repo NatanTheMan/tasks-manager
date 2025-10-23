@@ -2,7 +2,7 @@
 
 function connection(): PDO
 {
-    $vars = parse_ini_file(__DIR__ . "/../.env");
+    $vars = parse_ini_file(ROOT . "/.env");
     foreach ($vars as $key => $value) {
         putenv("$key=$value");
         $_ENV[$key] = $value;
@@ -13,8 +13,7 @@ function connection(): PDO
     $user = getenv("DB_USER");
     $password = getenv("DB_PASSWORD");
 
-    $conn = new PDO("mysql:host=$host;dbname=$database", $user, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    return $conn;
+    return new PDO("mysql:host=$host;dbname=$database", $user, $password, [
+          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+        ]);
 }
