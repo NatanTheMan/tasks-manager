@@ -21,7 +21,7 @@ function getOneUser(string $email)
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $conn = null;
-    if (!$stmt->fetch(PDO::FETCH_OBJ)) {
+    if ($stmt->fetch(PDO::FETCH_OBJ) == false) {
         return null;
     }
     return $stmt->fetch(PDO::FETCH_OBJ);

@@ -1,0 +1,21 @@
+{
+  "name": "natan/tasks-manager",
+  "autoload": {
+    "psr-4": {
+      "app\\": "app"
+    },
+    "files": [
+      "app/router/router.php",
+      "app/router/routes.php",
+      "app/core/loadController.php",
+      "app/helpers/constants.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Natan Costa",
+      "email": "natanscosta7@gmail.com"
+    }
+  ],
+  "require": {}
+}
