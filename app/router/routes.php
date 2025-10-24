@@ -5,5 +5,5 @@ return [
   "/login" => "User@login",
   "/user/create" => "User@create",
   "/task/create" => "Task@create",
-  "/task/edit" => "Task@edit",
+  "/task/[0-9]+/edit" => "Task@edit",
 ];

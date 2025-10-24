@@ -1,6 +1,6 @@
 <?php
 
-function loadController($uri)
+function loadController($uri, $params)
 {
     [$controller, $method] = explode('@', $uri);
 
@@ -16,5 +16,5 @@ function loadController($uri)
 
     $controllerInstance = new $controllerWihNamespace();
 
-    return $controllerInstance->$method();
+    return $controllerInstance->$method($params);
 }

@@ -9,8 +9,10 @@ class Task
         require VIEWS . '/task/create.php';
     }
 
-    public function edit()
+    public function edit($params)
     {
-        require VIEWS . '/task/edit.php';
+        return ['view' => 'task/edit.php', 'data' => [
+          'task' => $params['task']
+        ]];
     }
 }
