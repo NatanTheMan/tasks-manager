@@ -5,10 +5,10 @@
       "app\\": "app"
     },
     "files": [
+      "app/helpers/constants.php",
       "app/router/router.php",
       "app/router/routes.php",
       "app/core/loadController.php",
-      "app/helpers/constants.php",
       "app/database/connection.php",
       "app/database/findAll.php"
     ]

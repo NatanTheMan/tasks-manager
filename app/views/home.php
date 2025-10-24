@@ -1,21 +1,6 @@
 <?php
 
-// session_start();
-//
-// require '../includes/header.php';
-// require_once '../includes/functions.php';
-// require_once '../actions/taskActions.php';
-//
-//
-// if (!isset($_SESSION['user_id']) || is_null($_SESSION['user_id'])) {
-//     print_r($_SESSION['user_id']);
-//     var_dump($_SESSION['user_id']);
-//     return;
-// }
-//
-// $tasks = getAllTasks($_SESSION['user_id']);
-//
-// $colorSettings = ["low" => "#bbb", "medium" => "#d2a", "high" => "#f00"];
+$colorSettings = ["low" => "#bbb", "medium" => "#d2a", "high" => "#f00"];
 
 ?>
 
@@ -27,7 +12,6 @@
    <title>Gerenciar Tarefas</title>
  </head>
  <body>
-  <?php require VIEWS . 'header.php'; ?>
   <h1>Tarefas</h1> 
   <table> 
     <tr> 

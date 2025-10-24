@@ -4,7 +4,7 @@ function loadController($uri)
 {
     [$controller, $method] = explode('@', $uri);
 
-    $controllerWihNamespace = CONTROLLER_PATH . $controller;
+    $controllerWihNamespace = "app\\controllers\\" . $controller;
 
     if (!class_exists($controllerWihNamespace)) {
         throw new Exception("Controller $controller dont exists");
@@ -16,5 +16,5 @@ function loadController($uri)
 
     $controllerInstance = new $controllerWihNamespace();
 
-    $controllerInstance->$method();
+    return $controllerInstance->$method();
 }

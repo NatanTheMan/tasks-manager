@@ -13,5 +13,5 @@ function router()
 
     $matchedUri = array_key_exists($uri, $routes) ? $routes[$uri] : [];
 
-    loadController($matchedUri);
+    return loadController($matchedUri);
 }

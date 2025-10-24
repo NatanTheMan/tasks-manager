@@ -2,23 +2,16 @@
 
 namespace app\controllers;
 
-use app\database\Tables;
-use app\helpers\UserFields;
+use app\helpers\Tables;
 
 class Home
 {
     public function index()
     {
-        $tasks = findAll("tasks", condition: "where user_id=11");
-        $email = '';
-        $password = '';
-
-        create(
-            Tables::Users,
-            [UserFields::Email, UserFields::Password],
-            [$email, $password]
-        );
-
-        require VIEWS . 'home.php';
+        $tasks = findAll(Tables::Tasks, condition:"WHERE user_id=11");
+        return [
+          "view" => "home.php",
+          "data" => ["title" => "Home","tasks" => $tasks]
+        ];
     }
 }

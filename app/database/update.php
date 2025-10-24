@@ -21,5 +21,3 @@ function setFields(array $fieldAndValues): string
     }
     return substr($str, 0, -2);
 }
-
-update(Tables::Tasks, [TaskFields::Done => "0"], 1);

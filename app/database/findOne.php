@@ -1,6 +1,8 @@
 <?php
 
-function findById(string $table, int $id, $fields = "*")
+use app\database\Tables;
+
+function findById(Tables $table, int $id, $fields = "*")
 {
     $conn = connection();
     $query = $conn->query("SELECT $fields FROM $table WHERE id=$id");
