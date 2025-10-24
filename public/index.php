@@ -10,7 +10,7 @@ try {
     }
 
     if (!file_exists(VIEWS . $data['view'])) {
-        throw new Exception("View não encontrada");
+        throw new Exception("View não encontrada: " . $data['view']);
     }
     extract($data['data']);
 

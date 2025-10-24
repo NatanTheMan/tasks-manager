@@ -13,5 +13,9 @@ function router()
 
     $matchedUri = array_key_exists($uri, $routes) ? $routes[$uri] : [];
 
+    if (empty($matchedUri)) {
+        $matchedUri = "NotFound@index";
+    }
+
     return loadController($matchedUri);
 }
