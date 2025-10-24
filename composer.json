@@ -6,11 +6,13 @@
     },
     "files": [
       "app/helpers/constants.php",
+      "app/helpers/when.php",
       "app/router/router.php",
       "app/router/routes.php",
       "app/core/loadController.php",
       "app/database/connection.php",
-      "app/database/findAll.php"
+      "app/database/findAll.php",
+      "app/database/findOne.php"
     ]
   },
   "authors": [

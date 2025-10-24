@@ -1,11 +1,11 @@
 <?php
 
-use app\database\Tables;
+use app\helpers\Tables;
 
 function findById(Tables $table, int $id, $fields = "*")
 {
     $conn = connection();
-    $query = $conn->query("SELECT $fields FROM $table WHERE id=$id");
+    $query = $conn->query("SELECT $fields FROM {$table->value} WHERE id=$id");
     return  $query->fetch() ;
 }
 

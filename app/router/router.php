@@ -46,10 +46,10 @@ function router()
 
     $routes = routes();
 
-    $matchedUri = array_key_exists($uri, $routes) ? [$routes[$uri]] : [];
+    $matchedUri = array_key_exists($uri, $routes) ? $routes[$uri] : [];
 
     if (empty($matchedUri)) {
-        $matchedUri = getDynamicUri($routes, $uri);
+        $matchedUri = getDynamicUri($routes[$_SERVER["REQUEST_METHOD"]], $uri);
         $params = getParams($uri, $matchedUri);
         $params = paramsFormat($uri, $params);
         $matchedUri = array_values($matchedUri)[0];
