@@ -52,7 +52,9 @@ function router()
         $matchedUri = getDynamicUri($routes[$_SERVER["REQUEST_METHOD"]], $uri);
         $params = getParams($uri, $matchedUri);
         $params = paramsFormat($uri, $params);
-        $matchedUri = array_values($matchedUri)[0];
+        if (!empty($matchedUri)) {
+            $matchedUri = array_values($matchedUri)[0];
+        }
     }
 
     if (empty($matchedUri)) {

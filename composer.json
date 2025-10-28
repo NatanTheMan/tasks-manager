@@ -12,7 +12,8 @@
       "app/core/loadController.php",
       "app/database/connection.php",
       "app/database/findAll.php",
-      "app/database/findOne.php"
+      "app/database/findOne.php",
+      "app/database/update.php"
     ]
   },
   "authors": [

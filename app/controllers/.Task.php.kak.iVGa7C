@@ -27,15 +27,14 @@ class Task
         ]];
     }
 
-    public function update($params)
+    public function update()
     {
         update(
             Tables::Tasks,
             [TaskFields::Description->value => $_POST['description'],
                   TaskFields::Urgency->value => $_POST['urgency']],
-            (int)$params['task']
+            1
         );
-        header('Location: /');
-        exit;
+        return new Home()->index();
     }
 }
