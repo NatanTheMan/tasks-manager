@@ -13,7 +13,8 @@
       "app/database/connection.php",
       "app/database/findAll.php",
       "app/database/findOne.php",
-      "app/database/update.php"
+      "app/database/update.php",
+      "app/helpers/goHome.php"
     ]
   },
   "authors": [

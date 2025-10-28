@@ -10,13 +10,13 @@
   <tr>
     <?php if ($task->done) : ?>
     <td>
-      <form action='../actions/undone.php?id=<?= $task->id ?>' method='post'>
+      <form action='/task/<?= $task->id ?>/undone' method='post'>
         <button type='submit'>❌</button>
       </form>
     </td>
     <?php else : ?>
     <td>
-      <form action='../actions/done.php?id=<?= $task->id ?>' method='post'>
+      <form action='/task/<?= $task->id ?>/done' method='post'>
         <button type='submit'>✅</button>
       </form>
     </td>

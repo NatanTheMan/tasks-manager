@@ -35,7 +35,18 @@ class Task
                   TaskFields::Urgency->value => $_POST['urgency']],
             (int)$params['task']
         );
-        header('Location: /');
-        exit;
+        goHome();
+    }
+
+    public function done($params)
+    {
+        update(Tables::Tasks,[TaskFields::Done->value => 1], (int)$params['task']);
+        goHome();
+    }
+
+    public function undone($params)
+    {
+        update(Tables::Tasks,[TaskFields::Done->value => 0], (int)$params['task']);
+        goHome();
     }
 }
