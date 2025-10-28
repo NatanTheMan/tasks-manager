@@ -49,4 +49,10 @@ class Task
         update(Tables::Tasks,[TaskFields::Done->value => 0], (int)$params['task']);
         goHome();
     }
+
+    public function delete($params)
+    {
+        delete(Tables::Tasks, (int)$params["task"]);
+        goHome();
+    }
 }

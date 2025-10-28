@@ -8,6 +8,7 @@ return [
     "/task/[0-9]+/edit" => "Task@update",
     "/task/[0-9]+/done" => "Task@done",
     "/task/[0-9]+/undone" => "Task@undone",
+    "/task/[0-9]+/delete" => "Task@delete",
   ],
   "GET" => [
     "/task/[0-9]+/edit" => "Task@edit",

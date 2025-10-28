@@ -32,7 +32,7 @@
       </form>
     </td>
     <td>
-      <form action='../actions/delete.php?id=<?= $task->id?>' method='post'>
+      <form action='/task/<?= $task->id?>/delete' method='post'>
         <button type='submit'>🗑️</button>
       </form>
     </td>
