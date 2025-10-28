@@ -1,13 +1,11 @@
 <?php
 
-use app\database\Tables;
-
-function create(Tables $table, array $fields, array $values): void
+function createTask(string $description, string $urgency, int $userId): void
 {
     $conn = connection();
-    $query = $conn->prepare("INSERT INTO :table (:fields) VALUES (:values);");
-    $query->bindParam(":table", $table);
-    $query->bindParam(":fields", substr(join(", ", $fields), 0, -2));
-    $query->bindParam(":values", substr(join(', ', $values), 0, -2));
+    $query = $conn->prepare("INSERT INTO tasks (description, urgency, user_id) VALUES (:description, :urgency, :user_id);");
+    $query->bindParam(":description", $description);
+    $query->bindParam(":urgency", $urgency);
+    $query->bindParam(":user_id", $userId);
     $query->execute();
 }

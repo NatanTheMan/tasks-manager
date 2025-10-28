@@ -15,6 +15,7 @@
       "app/database/findOne.php",
       "app/database/update.php",
       "app/database/delete.php",
+      "app/database/insert.php",
       "app/helpers/goHome.php"
     ]
   },

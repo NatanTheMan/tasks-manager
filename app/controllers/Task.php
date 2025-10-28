@@ -9,7 +9,12 @@ class Task
 {
     public function create()
     {
-        require VIEWS . "/task/create.php";
+        return [
+            "view" => "task/create.php",
+            "data" => [
+                "title" => "Criar Tarefa"
+            ]
+        ];
     }
 
     public function edit($params)
@@ -53,6 +58,12 @@ class Task
     public function delete($params)
     {
         delete(Tables::Tasks, (int)$params["task"]);
+        goHome();
+    }
+
+    public function save($params)
+    {
+        createTask($_POST["description"], $_POST["urgency"], 1);
         goHome();
     }
 }
