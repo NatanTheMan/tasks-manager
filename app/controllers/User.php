@@ -4,13 +4,11 @@ namespace app\controllers;
 
 class User
 {
-    public function login()
-    {
-        require VIEWS . '/user/login.php';
-    }
-
     public function create()
     {
-        require VIEWS . 'user/create.php';
+        return [
+            "view" => "user/create.php",
+            "data" => ["title" => "Criar conta"]
+        ];
     }
 }

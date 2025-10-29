@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 namespace app\controllers;
 
@@ -45,33 +45,32 @@ class Task
              ],
             (int)$params['task']
         );
-        goHome();
+        redirect("/");
     }
 
     public function done($params)
     {
         update(Tables::Tasks, [TaskFields::Done->value => 1], (int)$params['task']);
-        goHome();
+        redirect("/");
     }
 
     public function undone($params)
     {
         update(Tables::Tasks, [TaskFields::Done->value => 0], (int)$params['task']);
-        goHome();
+        redirect("/");
     }
 
     public function delete($params)
     {
         delete(Tables::Tasks, (int)$params["task"]);
-        goHome();
+        redirect("/");
     }
 
     public function save($params)
     {
         $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
         $urgency = filter_input(INPUT_POST, "urgency", FILTER_SANITIZE_SPECIAL_CHARS);
-
         createTask($description, $urgency, 1);
-        goHome();
+        redirect("/");
     }
 }
