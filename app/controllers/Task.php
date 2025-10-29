@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace app\controllers;
 
@@ -34,10 +34,15 @@ class Task
 
     public function update($params)
     {
+        $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
+        $urgency = filter_input(INPUT_POST, "urgency", FILTER_SANITIZE_SPECIAL_CHARS);
+
         update(
             Tables::Tasks,
-            [TaskFields::Description->value => $_POST['description'],
-                  TaskFields::Urgency->value => $_POST['urgency']],
+            [
+                TaskFields::Description->value => $description,
+                TaskFields::Urgency->value => $urgency
+             ],
             (int)$params['task']
         );
         goHome();
@@ -45,13 +50,13 @@ class Task
 
     public function done($params)
     {
-        update(Tables::Tasks,[TaskFields::Done->value => 1], (int)$params['task']);
+        update(Tables::Tasks, [TaskFields::Done->value => 1], (int)$params['task']);
         goHome();
     }
 
     public function undone($params)
     {
-        update(Tables::Tasks,[TaskFields::Done->value => 0], (int)$params['task']);
+        update(Tables::Tasks, [TaskFields::Done->value => 0], (int)$params['task']);
         goHome();
     }
 
@@ -63,7 +68,10 @@ class Task
 
     public function save($params)
     {
-        createTask($_POST["description"], $_POST["urgency"], 1);
+        $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
+        $urgency = filter_input(INPUT_POST, "urgency", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        createTask($description, $urgency, 1);
         goHome();
     }
 }
