@@ -1,6 +1,7 @@
 <?php
 
-function goHome() {
+function goHome()
+{
     header("Location: /");
     exit;
 }
