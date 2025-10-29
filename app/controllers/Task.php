@@ -2,9 +2,6 @@
 
 namespace app\controllers;
 
-use app\helpers\Tables;
-use app\helpers\TaskFields;
-
 class Task
 {
     public function create()
@@ -19,7 +16,7 @@ class Task
 
     public function edit($params)
     {
-        $task = findById(Tables::Tasks, $params["task"]);
+        $task = findBy("tasks", "id", (int)$params["task"]);
         $urgencyValues = [
           "low" => "Baixa",
           "medium" => "Média",
@@ -37,32 +34,25 @@ class Task
         $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
         $urgency = filter_input(INPUT_POST, "urgency", FILTER_SANITIZE_SPECIAL_CHARS);
 
-        update(
-            Tables::Tasks,
-            [
-                TaskFields::Description->value => $description,
-                TaskFields::Urgency->value => $urgency
-             ],
-            (int)$params['task']
-        );
+        editTask($description, $urgency, (int)$params['task']);
         redirect("/");
     }
 
     public function done($params)
     {
-        update(Tables::Tasks, [TaskFields::Done->value => 1], (int)$params['task']);
+        editStatus(1, (int)$params['task']);
         redirect("/");
     }
 
     public function undone($params)
     {
-        update(Tables::Tasks, [TaskFields::Done->value => 0], (int)$params['task']);
+        editStatus(0, (int)$params['task']);
         redirect("/");
     }
 
     public function delete($params)
     {
-        delete(Tables::Tasks, (int)$params["task"]);
+        delete("tasks", (int)$params["task"]);
         redirect("/");
     }
 

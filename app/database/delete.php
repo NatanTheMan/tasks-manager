@@ -1,10 +1,9 @@
 <?php
 
-use app\helpers\Tables;
-
-function delete(Tables $table, int $id): void
+function delete($table, int $id)
 {
     $conn = connection();
-    $stmt = $conn->prepare("DELETE FROM {$table->value} WHERE id={$id}");
+    $stmt = $conn->prepare("DELETE FROM $table WHERE id=:id");
+    $stmt->bindParam(":id", $id);
     $stmt->execute();
 }

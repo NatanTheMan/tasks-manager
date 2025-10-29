@@ -1,20 +1,20 @@
 <?php
 
-use app\helpers\Tables;
-
-function update(Tables $table, array $fieldsAndValues, int $id): void
+function editTask($description, $urgency, $id)
 {
     $conn = connection();
-    $fields = setFields($fieldsAndValues);
-    $stmt = $conn->prepare("UPDATE {$table->value} SET {$fields} WHERE id={$id}");
+    $stmt = $conn->prepare("UPDATE tasks SET description=:description, urgency=:urgency WHERE id=:id");
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":urgency", $urgency);
+    $stmt->bindParam(":id", $id);
     $stmt->execute();
 }
 
-function setFields(array $fieldAndValues): string
+function editStatus($status, $id)
 {
-    $str = "";
-    foreach ($fieldAndValues as $field => $value) {
-        $str .= "$field=\"$value\", ";
-    }
-    return substr($str, 0, -2);
+    $conn = connection();
+    $stmt = $conn->prepare("UPDATE tasks SET done=:status WHERE id=:id");
+    $stmt->bindParam(":status", $status);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 }

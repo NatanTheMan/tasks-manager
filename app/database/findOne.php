@@ -1,17 +1,10 @@
 <?php
 
-use app\helpers\Tables;
-
-function findById(Tables $table, int $id, $fields = "*")
+function findBy($table, $field, $value)
 {
     $conn = connection();
-    $query = $conn->query("SELECT $fields FROM {$table->value} WHERE id=$id");
-    return  $query->fetch() ;
-}
-
-function findByEmail(string $email, $fields = "*")
-{
-    $conn = connection();
-    $query = $conn->query("SELECT $fields FROM users WHERE email=$email");
-    return $query->fetch();
+    $stmt = $conn->prepare("SELECT * FROM $table WHERE $field=:value");
+    $stmt->bindParam(":value", $value);
+    $stmt->execute();
+    return $stmt->fetch();
 }
