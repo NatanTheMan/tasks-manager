@@ -51,7 +51,8 @@ function router()
     $instLogged = !isset($_SESSION['logged']) || empty($_SESSION['logged']);
     $requestInstForLoginOptions = $matchedUri != "Login@login"
                                     && $matchedUri != "Login@index"
-                                    && $matchedUri != "User@create";
+                                    && $matchedUri != "User@create"
+                                    && $matchedUri != "User@save";
     if ($instLogged && $requestInstForLoginOptions) {
         return redirect("/login");
     }

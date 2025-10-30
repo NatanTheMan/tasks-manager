@@ -60,7 +60,7 @@ class Task
     {
         $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
         $urgency = filter_input(INPUT_POST, "urgency", FILTER_SANITIZE_SPECIAL_CHARS);
-        createTask($description, $urgency, 1);
+        createTask($description, $urgency, $_SESSION["logged"]->id);
         redirect("/");
     }
 }

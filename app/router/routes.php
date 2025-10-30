@@ -4,6 +4,7 @@ return [
   "POST" => [
     "/login" => "Login@login",
     "/task/create" => "Task@save",
+    "/user/create" => "User@save",
     "/task/[0-9]+/done" => "Task@done",
     "/task/[0-9]+/edit" => "Task@update",
     "/task/[0-9]+/undone" => "Task@undone",
