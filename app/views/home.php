@@ -1,3 +1,5 @@
+<?php require VIEWS . "/header.php"; ?>
+
 <h1>Tarefas</h1> 
 <table> 
 <tr> 

@@ -1,3 +1,5 @@
+<?php require VIEWS . "/header.php"; ?>
+
 <h1>Criar tarefa</h1> 
 <form action="/task/create" method="post">
   <label for="description">Tarefa: </label>

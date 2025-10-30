@@ -1,3 +1,5 @@
+<?php require VIEWS . "/header.php"; ?>
+
 <h1>Atualizar tarefa</h1> 
 <form action="/task/<?= $task->id ?>/edit" method="post">
   <label for="description">Tarefa: </label><br>
