@@ -43,10 +43,12 @@ function paramsFormat($uri, $params)
 function router()
 {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
     $routes = routes();
+    $matchedUri = array_key_exists($uri, $routes[$_SERVER["REQUEST_METHOD"]]) ? $routes[$_SERVER["REQUEST_METHOD"]][$uri] : [];
 
-    $matchedUri = array_key_exists($uri, $routes) ? $routes[$uri] : [];
+    if ((!isset($_SESSION['logged']) || empty($_SESSION['logged'])) && ($matchedUri != "Login@login" && $matchedUri != "Login@index")) {
+        return redirect("/login");
+    }
 
     if (empty($matchedUri)) {
         $matchedUri = getDynamicUri($routes[$_SERVER["REQUEST_METHOD"]], $uri);

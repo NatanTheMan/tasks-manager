@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+session_start();
+
 class Login
 {
     public function index()
@@ -19,9 +21,27 @@ class Login
 
         if (empty($email) || empty($password)) {
             setFlash("message", "Usuario e senha sao campos obrigatorios");
-            return redirect("/login") ;
+            return redirect("/login");
         }
 
+        $user = findBy("users", "email", $email);
+        if (!$user) {
+            setFlash("message", "Usuario ou senha incorretos");
+            return redirect("/login");
+        }
 
+        if ($password !== $user->password) {
+            setFlash("message", "Usuario ou senha incorretos");
+            return redirect("/login");
+        }
+
+        $_SESSION['logged'] = $user;
+        return redirect("/");
+    }
+
+    public function exit()
+    {
+        unset($_SESSION['logged']);
+        return redirect("/login");
     }
 }

@@ -12,6 +12,7 @@ return [
   "GET" => [
     "/" => "Home@index",
     "/login" => "Login@index",
+    "/logout" => "Login@exit",
     "/create" => "User@create",
     "/task/create" => "Task@create",
     "/task/[0-9]+/edit" => "Task@edit",
