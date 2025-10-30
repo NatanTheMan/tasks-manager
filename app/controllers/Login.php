@@ -30,7 +30,7 @@ class Login
             return redirect("/login");
         }
 
-        if ($password !== $user->password) {
+        if (!password_verify($password, $user->password)) {
             setFlash("message", "Usuario ou senha incorretos");
             return redirect("/login");
         }
